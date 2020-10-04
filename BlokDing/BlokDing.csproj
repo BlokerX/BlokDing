@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Kurs__Budowanie_kompletnej_apk_</RootNamespace>
+    <RootNamespace>BlokDing</RootNamespace>
     <AssemblyName>BlokDing</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -170,7 +170,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\_ENDOFSOUND_.wav" />
-    <None Include="Resources\CISZA.wav" />
     <None Include="Resources\Waterfall.wav" />
     <None Include="Resources\Spreading.wav" />
     <None Include="Resources\So_small.wav" />
@@ -202,12 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ENDSound.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\duza ikona.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mala ikona.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BigIcon.ico" />
