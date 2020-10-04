@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlokDing", "Kurs_(Budowanie_kompletnej_apk)\BlokDing.csproj", "{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlokDing", "BlokDing\BlokDing.csproj", "{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +17,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|Any CPU.ActiveCfg = Debug
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x64.ActiveCfg = Debug
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x64.Build.0 = Debug
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x86.ActiveCfg = Debug
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x86.Build.0 = Debug
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|Any CPU.ActiveCfg = Release
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x64.ActiveCfg = Release
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x64.Build.0 = Release
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x86.ActiveCfg = Release
+		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x86.Build.0 = Release
 		{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}.Debug|x64.ActiveCfg = Debug|x64
@@ -29,16 +39,6 @@ Global
 		{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}.Release|x64.Build.0 = Release|x64
 		{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}.Release|x86.ActiveCfg = Release|x86
 		{EDF48176-C3E3-464A-A45D-7EFC1DC1A449}.Release|x86.Build.0 = Release|x86
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|Any CPU.ActiveCfg = Debug
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x64.ActiveCfg = Debug
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x64.Build.0 = Debug
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x86.ActiveCfg = Debug
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Debug|x86.Build.0 = Debug
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|Any CPU.ActiveCfg = Release
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x64.ActiveCfg = Release
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x64.Build.0 = Release
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x86.ActiveCfg = Release
-		{59FC21C3-A315-43E6-92DA-0DD20B0F72BE}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
