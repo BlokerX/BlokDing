@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Media;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
@@ -22,7 +23,7 @@ namespace BlokDing
             ClassicTheme = 4
         }
 
-        #endregion
+        #endregion  
 
         #region Zmienne
 
@@ -351,22 +352,33 @@ namespace BlokDing
         private void timer1_Tick(object sender, EventArgs e)
         {
             _ticks += 1;
+            StringBuilder stringBuilder = new StringBuilder();
 
             // Procedura wyliczania i pokazywania na "lPokazanyCzas" danego czasu / Clam time protocole
             #region Show_time
-            //--------------------
+            //---------PETLA-----------
             if ((_ticks / 3600) < 10) // Godzina < 10
             {
                 if ((_ticks / 60 - (_ticks / 3600 * 60)) < 10) // Minuta < 10
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append(_ticks / 3600);
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks / 60 - (_ticks / 3600 * 60));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
                 }
 
@@ -374,28 +386,45 @@ namespace BlokDing
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
                 }
             }
-
             else if ((_ticks / 3600) <= 10) // Godzina >= 10
             {
                 if ((_ticks / 60 - (_ticks / 3600 * 60)) < 10) // Minuta < 10
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
                 }
 
@@ -403,25 +432,42 @@ namespace BlokDing
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + _ticks / 3600 * 3600)));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks / 60 - (_ticks / 3600 * 60));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600 * 3600)));
                     }
                 }
             }
-            //--------------------
+            //-------------------------
+
+            // Wyswietl / Show
+            lPokazanyCzas.Text = stringBuilder.ToString();
+
+            // Zresetuj wartosc stringBuilder(a) / Reset value of stringBuilder
+            stringBuilder.Clear();
+
             #endregion
 
             // Pokazywanie wyliczonego czasu na "niIkonaPowiadomienia" / Show the time in the "niIkonaPowiadomienia"
             #region Okno_powiadomienia
 
-            popupNotifier.ContentText =
-                    "Alarm: włączony" +
-                    "\nOdliczanie: " +
-                    lPokazanyCzas.Text;
+            stringBuilder.Append(lPokazanyCzas.Text);
+            stringBuilder.Append("Alarm: włączony");
+            stringBuilder.Append("Alarm: włączony");
+            stringBuilder.Append("\nOdliczanie: ");
+
+            popupNotifier.ContentText = stringBuilder.ToString();
 
             #endregion
 
