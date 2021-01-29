@@ -213,6 +213,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\podkreslnikDark.png" />
+    <None Include="Resources\podkreslnik.png" />
+    <None Include="Resources\okienkoDark.png" />
+    <None Include="Resources\okienko.png" />
+    <None Include="Resources\krzyzykDark.png" />
+    <None Include="Resources\krzyzyk.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
