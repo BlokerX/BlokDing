@@ -63,10 +63,24 @@ namespace BlokDing
             this.niIkonaPowiadomienia = new System.Windows.Forms.NotifyIcon(this.components);
             this.bwOdtworzAlarm = new System.ComponentModel.BackgroundWorker();
             this.bZmienMotyw = new System.Windows.Forms.Button();
+            this.PanelMain = new System.Windows.Forms.Panel();
+            this.ControlBoxPanel = new System.Windows.Forms.Panel();
+            this.ControlBoxMinimizeButton = new System.Windows.Forms.Button();
+            this.ControlBoxMaximizeButton = new System.Windows.Forms.Button();
+            this.ControlBoxCloseButton = new System.Windows.Forms.Button();
+            this.ControlBoxTextPanel = new System.Windows.Forms.Panel();
+            this.ControlBoxTextLabel = new System.Windows.Forms.Label();
+            this.ControlBoxIconPanel = new System.Windows.Forms.Panel();
+            this.ControlBoxIcon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUD_Godziny)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUD_Minuty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUD_Sekundy)).BeginInit();
             this.gbWybranaSciezka.SuspendLayout();
+            this.PanelMain.SuspendLayout();
+            this.ControlBoxPanel.SuspendLayout();
+            this.ControlBoxTextPanel.SuspendLayout();
+            this.ControlBoxIconPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ControlBoxIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // bUstawienia
@@ -351,7 +365,6 @@ namespace BlokDing
             this.cbWyborAlarmuWgranego.Location = new System.Drawing.Point(12, 215);
             this.cbWyborAlarmuWgranego.Name = "cbWyborAlarmuWgranego";
             this.cbWyborAlarmuWgranego.Size = new System.Drawing.Size(300, 26);
-            this.cbWyborAlarmuWgranego.SelectedIndex = 0;
             this.cbWyborAlarmuWgranego.TabIndex = 22;
             this.cbWyborAlarmuWgranego.Visible = false;
             // 
@@ -359,7 +372,7 @@ namespace BlokDing
             // 
             this.gbWybranaSciezka.Controls.Add(this.lWybranaSciezka);
             this.gbWybranaSciezka.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbWybranaSciezka.Location = new System.Drawing.Point(12, 215);
+            this.gbWybranaSciezka.Location = new System.Drawing.Point(12, 210);
             this.gbWybranaSciezka.Name = "gbWybranaSciezka";
             this.gbWybranaSciezka.Size = new System.Drawing.Size(300, 61);
             this.gbWybranaSciezka.TabIndex = 24;
@@ -381,7 +394,7 @@ namespace BlokDing
             // bResetujAlarm
             // 
             this.bResetujAlarm.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bResetujAlarm.Location = new System.Drawing.Point(225, 261);
+            this.bResetujAlarm.Location = new System.Drawing.Point(225, 255);
             this.bResetujAlarm.Name = "bResetujAlarm";
             this.bResetujAlarm.Size = new System.Drawing.Size(80, 20);
             this.bResetujAlarm.TabIndex = 23;
@@ -425,39 +438,156 @@ namespace BlokDing
             this.bZmienMotyw.Visible = false;
             this.bZmienMotyw.Click += new System.EventHandler(this.bZmienMotyw_Click);
             // 
+            // PanelMain
+            // 
+            this.PanelMain.Controls.Add(this.bResetujAlarm);
+            this.PanelMain.Controls.Add(this.bZmienMotyw);
+            this.PanelMain.Controls.Add(this.bInformacjeOdnosnieProgaramu);
+            this.PanelMain.Controls.Add(this.bAnulujUruchomAlarm);
+            this.PanelMain.Controls.Add(this.cbWyborAlarmuWgranego);
+            this.PanelMain.Controls.Add(this.lTekstPodLogo);
+            this.PanelMain.Controls.Add(this.bWyborAlarmu);
+            this.PanelMain.Controls.Add(this.bUruchomAlarm);
+            this.PanelMain.Controls.Add(this.bPrzywrocDomyslne);
+            this.PanelMain.Controls.Add(this.lPokazanyCzas);
+            this.PanelMain.Controls.Add(this.lMenu);
+            this.PanelMain.Controls.Add(this.lUruchomAlarm);
+            this.PanelMain.Controls.Add(this.lUstawienia);
+            this.PanelMain.Controls.Add(this.bExit);
+            this.PanelMain.Controls.Add(this.lSekundy);
+            this.PanelMain.Controls.Add(this.numericUD_Godziny);
+            this.PanelMain.Controls.Add(this.lMinuty);
+            this.PanelMain.Controls.Add(this.numericUD_Minuty);
+            this.PanelMain.Controls.Add(this.lGodziny);
+            this.PanelMain.Controls.Add(this.numericUD_Sekundy);
+            this.PanelMain.Controls.Add(this.bAnulujUstawienia);
+            this.PanelMain.Controls.Add(this.bZastosujUstawienia);
+            this.PanelMain.Controls.Add(this.gbWybranaSciezka);
+            this.PanelMain.Controls.Add(this.bUstawienia);
+            this.PanelMain.Controls.Add(this.bReset);
+            this.PanelMain.Controls.Add(this.bStartOdliczania);
+            this.PanelMain.Controls.Add(this.bOdsluchaj);
+            this.PanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelMain.Location = new System.Drawing.Point(0, 30);
+            this.PanelMain.Name = "PanelMain";
+            this.PanelMain.Size = new System.Drawing.Size(324, 369);
+            this.PanelMain.TabIndex = 27;
+            // 
+            // ControlBoxPanel
+            // 
+            this.ControlBoxPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.ControlBoxPanel.Controls.Add(this.ControlBoxMinimizeButton);
+            this.ControlBoxPanel.Controls.Add(this.ControlBoxMaximizeButton);
+            this.ControlBoxPanel.Controls.Add(this.ControlBoxCloseButton);
+            this.ControlBoxPanel.Controls.Add(this.ControlBoxTextPanel);
+            this.ControlBoxPanel.Controls.Add(this.ControlBoxIconPanel);
+            this.ControlBoxPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ControlBoxPanel.Location = new System.Drawing.Point(0, 0);
+            this.ControlBoxPanel.Name = "ControlBoxPanel";
+            this.ControlBoxPanel.Size = new System.Drawing.Size(324, 30);
+            this.ControlBoxPanel.TabIndex = 28;
+            this.ControlBoxPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ControlBoxPanel_MouseMove);
+            // 
+            // ControlBoxMinimizeButton
+            // 
+            this.ControlBoxMinimizeButton.BackgroundImage = global::BlokDing.Properties.Resources.podkreslnik;
+            this.ControlBoxMinimizeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ControlBoxMinimizeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ControlBoxMinimizeButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.ControlBoxMinimizeButton.FlatAppearance.BorderSize = 0;
+            this.ControlBoxMinimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ControlBoxMinimizeButton.ForeColor = System.Drawing.Color.Transparent;
+            this.ControlBoxMinimizeButton.Location = new System.Drawing.Point(189, 0);
+            this.ControlBoxMinimizeButton.Name = "ControlBoxMinimizeButton";
+            this.ControlBoxMinimizeButton.Size = new System.Drawing.Size(45, 30);
+            this.ControlBoxMinimizeButton.TabIndex = 3;
+            this.ControlBoxMinimizeButton.UseVisualStyleBackColor = true;
+            this.ControlBoxMinimizeButton.Click += new System.EventHandler(this.ControlBoxMinimizeButton_Click);
+            // 
+            // ControlBoxMaximizeButton
+            // 
+            this.ControlBoxMaximizeButton.BackgroundImage = global::BlokDing.Properties.Resources.okienko;
+            this.ControlBoxMaximizeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ControlBoxMaximizeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ControlBoxMaximizeButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.ControlBoxMaximizeButton.FlatAppearance.BorderSize = 0;
+            this.ControlBoxMaximizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ControlBoxMaximizeButton.ForeColor = System.Drawing.Color.Transparent;
+            this.ControlBoxMaximizeButton.Location = new System.Drawing.Point(234, 0);
+            this.ControlBoxMaximizeButton.Name = "ControlBoxMaximizeButton";
+            this.ControlBoxMaximizeButton.Size = new System.Drawing.Size(45, 30);
+            this.ControlBoxMaximizeButton.TabIndex = 2;
+            this.ControlBoxMaximizeButton.UseVisualStyleBackColor = true;
+            this.ControlBoxMaximizeButton.Click += new System.EventHandler(this.ControlBoxMaximizeButton_Click);
+            // 
+            // ControlBoxCloseButton
+            // 
+            this.ControlBoxCloseButton.BackgroundImage = global::BlokDing.Properties.Resources.krzyzyk;
+            this.ControlBoxCloseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ControlBoxCloseButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ControlBoxCloseButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.ControlBoxCloseButton.FlatAppearance.BorderSize = 0;
+            this.ControlBoxCloseButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.ControlBoxCloseButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.ControlBoxCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ControlBoxCloseButton.ForeColor = System.Drawing.Color.Transparent;
+            this.ControlBoxCloseButton.Location = new System.Drawing.Point(279, 0);
+            this.ControlBoxCloseButton.Name = "ControlBoxCloseButton";
+            this.ControlBoxCloseButton.Size = new System.Drawing.Size(45, 30);
+            this.ControlBoxCloseButton.TabIndex = 1;
+            this.ControlBoxCloseButton.UseVisualStyleBackColor = true;
+            this.ControlBoxCloseButton.Click += new System.EventHandler(this.ControlBoxCloseButton_Click);
+            // 
+            // ControlBoxTextPanel
+            // 
+            this.ControlBoxTextPanel.AutoSize = true;
+            this.ControlBoxTextPanel.Controls.Add(this.ControlBoxTextLabel);
+            this.ControlBoxTextPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ControlBoxTextPanel.Location = new System.Drawing.Point(27, 0);
+            this.ControlBoxTextPanel.Name = "ControlBoxTextPanel";
+            this.ControlBoxTextPanel.Size = new System.Drawing.Size(4, 30);
+            this.ControlBoxTextPanel.TabIndex = 5;
+            this.ControlBoxTextPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ControlBoxTextPanel_MouseMove);
+            // 
+            // ControlBoxTextLabel
+            // 
+            this.ControlBoxTextLabel.AutoSize = true;
+            this.ControlBoxTextLabel.ForeColor = System.Drawing.Color.White;
+            this.ControlBoxTextLabel.Location = new System.Drawing.Point(1, 9);
+            this.ControlBoxTextLabel.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.ControlBoxTextLabel.Name = "ControlBoxTextLabel";
+            this.ControlBoxTextLabel.Size = new System.Drawing.Size(0, 13);
+            this.ControlBoxTextLabel.TabIndex = 3;
+            this.ControlBoxTextLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ControlBoxTextLabel_MouseMove);
+            // 
+            // ControlBoxIconPanel
+            // 
+            this.ControlBoxIconPanel.Controls.Add(this.ControlBoxIcon);
+            this.ControlBoxIconPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ControlBoxIconPanel.Location = new System.Drawing.Point(0, 0);
+            this.ControlBoxIconPanel.Name = "ControlBoxIconPanel";
+            this.ControlBoxIconPanel.Size = new System.Drawing.Size(27, 30);
+            this.ControlBoxIconPanel.TabIndex = 4;
+            // 
+            // ControlBoxIcon
+            // 
+            this.ControlBoxIcon.BackgroundImage = global::BlokDing.Properties.Resources.BigIconImage;
+            this.ControlBoxIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ControlBoxIcon.Location = new System.Drawing.Point(7, 6);
+            this.ControlBoxIcon.Name = "ControlBoxIcon";
+            this.ControlBoxIcon.Size = new System.Drawing.Size(18, 18);
+            this.ControlBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ControlBoxIcon.TabIndex = 2;
+            this.ControlBoxIcon.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 369);
-            this.Controls.Add(this.bZmienMotyw);
-            this.Controls.Add(this.bResetujAlarm);
-            this.Controls.Add(this.bOdsluchaj);
-            this.Controls.Add(this.cbWyborAlarmuWgranego);
-            this.Controls.Add(this.lTekstPodLogo);
-            this.Controls.Add(this.bInformacjeOdnosnieProgaramu);
-            this.Controls.Add(this.bWyborAlarmu);
-            this.Controls.Add(this.bPrzywrocDomyslne);
-            this.Controls.Add(this.lMenu);
-            this.Controls.Add(this.lUstawienia);
-            this.Controls.Add(this.lSekundy);
-            this.Controls.Add(this.lMinuty);
-            this.Controls.Add(this.lGodziny);
-            this.Controls.Add(this.bAnulujUstawienia);
-            this.Controls.Add(this.bZastosujUstawienia);
-            this.Controls.Add(this.numericUD_Sekundy);
-            this.Controls.Add(this.numericUD_Minuty);
-            this.Controls.Add(this.numericUD_Godziny);
-            this.Controls.Add(this.bExit);
-            this.Controls.Add(this.lUruchomAlarm);
-            this.Controls.Add(this.lPokazanyCzas);
-            this.Controls.Add(this.bUruchomAlarm);
-            this.Controls.Add(this.bStartOdliczania);
-            this.Controls.Add(this.bReset);
-            this.Controls.Add(this.bUstawienia);
-            this.Controls.Add(this.bAnulujUruchomAlarm);
-            this.Controls.Add(this.gbWybranaSciezka);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.ClientSize = new System.Drawing.Size(324, 399);
+            this.Controls.Add(this.PanelMain);
+            this.Controls.Add(this.ControlBoxPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -469,8 +599,15 @@ namespace BlokDing
             ((System.ComponentModel.ISupportInitialize)(this.numericUD_Sekundy)).EndInit();
             this.gbWybranaSciezka.ResumeLayout(false);
             this.gbWybranaSciezka.PerformLayout();
+            this.PanelMain.ResumeLayout(false);
+            this.PanelMain.PerformLayout();
+            this.ControlBoxPanel.ResumeLayout(false);
+            this.ControlBoxPanel.PerformLayout();
+            this.ControlBoxTextPanel.ResumeLayout(false);
+            this.ControlBoxTextPanel.PerformLayout();
+            this.ControlBoxIconPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ControlBoxIcon)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -507,5 +644,14 @@ namespace BlokDing
         private NotifyIcon niIkonaPowiadomienia;
         private System.ComponentModel.BackgroundWorker bwOdtworzAlarm;
         private Button bZmienMotyw;
+        private Panel PanelMain;
+        private Panel ControlBoxPanel;
+        private Button ControlBoxMinimizeButton;
+        private Button ControlBoxMaximizeButton;
+        private Button ControlBoxCloseButton;
+        private Panel ControlBoxTextPanel;
+        private Label ControlBoxTextLabel;
+        private Panel ControlBoxIconPanel;
+        private PictureBox ControlBoxIcon;
     }
 }

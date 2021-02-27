@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.IO;
 using System.Media;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
@@ -22,7 +24,7 @@ namespace BlokDing
             ClassicTheme = 4
         }
 
-        #endregion
+        #endregion  
 
         #region Zmienne
 
@@ -49,6 +51,12 @@ namespace BlokDing
         private void UstawMotywTheme()
         {
             #region Deklaracje_zmiennych_przehowujących_kolory
+            Color ControlBoxBackgroundColor = new Color();
+            Color ControlBoxForeColor = new Color();
+            Image ControlBoxCloseButtonImage = null;
+            Image ControlBoxMaximizeButtonImage = null;
+            Image ControlBoxMinimizeButtonImage = null;
+
             Color BackColorForButton = new Color();
             Color ForeColorForButton = new Color();
             Color BackColorForCBiNUD = new Color();
@@ -69,6 +77,12 @@ namespace BlokDing
             // Ustawianie kolorow dla: "DarkTheme"
             if (theme == Themes.DefaultTheme || theme == Themes.DarkTheme)
             {
+                ControlBoxBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+                ControlBoxForeColor = System.Drawing.Color.White;
+                ControlBoxCloseButtonImage = BlokDing.Properties.Resources.krzyzyk;
+                ControlBoxMaximizeButtonImage = BlokDing.Properties.Resources.okienko;
+                ControlBoxMinimizeButtonImage = BlokDing.Properties.Resources.podkreslnik;
+
                 BackColorForButton = Color.FromArgb(46, 54, 58);
                 ForeColorForButton = System.Drawing.SystemColors.ControlLight;
                 BackColorForCBiNUD = BackColorForButton;
@@ -96,6 +110,12 @@ namespace BlokDing
             // Ustawianie kolorow dla: "LightTheme"
             else if (theme == Themes.LightTheme)
             {
+                ControlBoxBackgroundColor = SystemColors.ControlLightLight;
+                ControlBoxForeColor = System.Drawing.Color.Black;
+                ControlBoxCloseButtonImage = BlokDing.Properties.Resources.krzyzykDark;
+                ControlBoxMaximizeButtonImage = BlokDing.Properties.Resources.okienkoDark;
+                ControlBoxMinimizeButtonImage = BlokDing.Properties.Resources.podkreslnikDark;
+
                 BackColorForButton = System.Drawing.SystemColors.ControlLight;
                 ForeColorForButton = System.Drawing.SystemColors.ControlText;
                 BackColorForCBiNUD = BackColorForButton;
@@ -123,6 +143,12 @@ namespace BlokDing
             // Ustawianie kolorow dla: "LightTheme2"
             else if (theme == Themes.LightTheme2)
             {
+                ControlBoxBackgroundColor = SystemColors.ControlLightLight;
+                ControlBoxForeColor = System.Drawing.Color.Black;
+                ControlBoxCloseButtonImage = BlokDing.Properties.Resources.krzyzykDark;
+                ControlBoxMaximizeButtonImage = BlokDing.Properties.Resources.okienkoDark;
+                ControlBoxMinimizeButtonImage = BlokDing.Properties.Resources.podkreslnikDark;
+
                 BackColorForButton = System.Drawing.SystemColors.Control;
                 ForeColorForButton = System.Drawing.SystemColors.ControlText;
                 BackColorForCBiNUD = BackColorForButton;
@@ -150,6 +176,12 @@ namespace BlokDing
             // Ustawianie kolorow dla: "ClassicTheme"
             else if (theme == Themes.ClassicTheme)
             {
+                ControlBoxBackgroundColor = SystemColors.ControlLight;
+                ControlBoxForeColor = System.Drawing.Color.Black;
+                ControlBoxCloseButtonImage = BlokDing.Properties.Resources.krzyzykDark;
+                ControlBoxMaximizeButtonImage = BlokDing.Properties.Resources.okienkoDark;
+                ControlBoxMinimizeButtonImage = BlokDing.Properties.Resources.podkreslnikDark;
+
                 BackColorForButton = System.Drawing.SystemColors.ControlLight;
                 ForeColorForButton = System.Drawing.SystemColors.ControlText;
                 BackColorForCBiNUD = System.Drawing.SystemColors.Window;
@@ -177,6 +209,13 @@ namespace BlokDing
             #endregion
 
             // KOLOROWANIE OBIEKTOW:
+
+            // Kolor ControlBox
+            this.ControlBoxPanel.BackColor = ControlBoxBackgroundColor;
+            this.ControlBoxTextLabel.ForeColor = ControlBoxForeColor;
+            this.ControlBoxCloseButton.BackgroundImage = ControlBoxCloseButtonImage;
+            this.ControlBoxMaximizeButton.BackgroundImage = ControlBoxMaximizeButtonImage;
+            this.ControlBoxMinimizeButton.BackgroundImage = ControlBoxMinimizeButtonImage;
 
             // Kolor tla okienka
             this.BackColor = BackColorForForm;
@@ -300,6 +339,8 @@ namespace BlokDing
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ControlBox_Loading();
+            cbWyborAlarmuWgranego.SelectedIndex = 0;
             // Domyslny motyw (tylko dla poupNotifier)
             popupNotifier_Designer();
 
@@ -351,22 +392,33 @@ namespace BlokDing
         private void timer1_Tick(object sender, EventArgs e)
         {
             _ticks += 1;
+            StringBuilder stringBuilder = new StringBuilder();
 
             // Procedura wyliczania i pokazywania na "lPokazanyCzas" danego czasu / Clam time protocole
             #region Show_time
-            //--------------------
+            //---------PETLA-----------
             if ((_ticks / 3600) < 10) // Godzina < 10
             {
                 if ((_ticks / 60 - (_ticks / 3600 * 60)) < 10) // Minuta < 10
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append(_ticks / 3600);
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks / 60 - (_ticks / 3600 * 60));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
                 }
 
@@ -374,28 +426,45 @@ namespace BlokDing
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = "0" + (_ticks / 3600).ToString() + ":" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append("0");
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
                 }
             }
-
             else if ((_ticks / 3600) <= 10) // Godzina >= 10
             {
                 if ((_ticks / 60 - (_ticks / 3600 * 60)) < 10) // Minuta < 10
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600));
                     }
                 }
 
@@ -403,25 +472,42 @@ namespace BlokDing
                 {
                     if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) < 10) // Sekunda < 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":0" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append((_ticks / 60 - (_ticks / 3600 * 60)));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + _ticks / 3600 * 3600)));
                     }
 
                     else if ((_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)) >= 10) // Sekunda >= 10
                     {
-                        lPokazanyCzas.Text = (_ticks / 3600).ToString() + ":0" + (_ticks / 60 - (_ticks / 3600 * 60)).ToString() + ":" + (_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600) * 3600)).ToString();
+                        stringBuilder.Append((_ticks / 3600));
+                        stringBuilder.Append(":0");
+                        stringBuilder.Append(_ticks / 60 - (_ticks / 3600 * 60));
+                        stringBuilder.Append(":");
+                        stringBuilder.Append(_ticks - ((_ticks / 60 - (_ticks / 3600 * 60)) * 60 + (_ticks / 3600 * 3600)));
                     }
                 }
             }
-            //--------------------
+            //-------------------------
+
+            // Wyswietl / Show
+            lPokazanyCzas.Text = stringBuilder.ToString();
+
+            // Zresetuj wartosc stringBuilder(a) / Reset value of stringBuilder
+            stringBuilder.Clear();
+
             #endregion
 
             // Pokazywanie wyliczonego czasu na "niIkonaPowiadomienia" / Show the time in the "niIkonaPowiadomienia"
             #region Okno_powiadomienia
 
-            popupNotifier.ContentText =
-                    "Alarm: włączony" +
-                    "\nOdliczanie: " +
-                    lPokazanyCzas.Text;
+            stringBuilder.Append(lPokazanyCzas.Text);
+            stringBuilder.Append("Alarm: włączony");
+            stringBuilder.Append("Alarm: włączony");
+            stringBuilder.Append("\nOdliczanie: ");
+
+            popupNotifier.ContentText = stringBuilder.ToString();
 
             #endregion
 
@@ -1093,6 +1179,144 @@ namespace BlokDing
 
         #endregion
 
+        // IMPORTANT //
+        #region ProtectForMaximalizeForm
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int WS_MAXIMIZEBOX = 0x00010000;
+                var cp = base.CreateParams;
+                cp.Style &= ~WS_MAXIMIZEBOX;
+                return cp;
+            }
+        }
+
+        #endregion
+        #region ControlBoxPanel
+
+        #region Drag window
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        #endregion
+
+        private readonly bool CloseBox = true;
+
+        private void ControlBox_MouseMove_Drag(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void ControlBox_Loading()
+        {
+            // Icon settings
+            if (this.ShowIcon == true)
+            {
+                ControlBoxIconPanel.Visible = true;
+                ControlBoxIcon.Image = this.Icon.ToBitmap();
+            }
+            else if (this.ShowIcon == false)
+            {
+                ControlBoxIconPanel.Visible = false;
+                ControlBoxTextLabel.Location = new Point(6, 9);
+            }
+
+            #region Minimized and maximized settings
+            //Close
+            if (this.CloseBox == true)
+            {
+                ControlBoxCloseButton.Visible = true;
+            }
+            else if (this.CloseBox == false)
+            {
+                ControlBoxCloseButton.Visible = false;
+            }
+            //Minimize
+            if (this.MinimizeBox == true)
+            {
+                ControlBoxMinimizeButton.Visible = true;
+            }
+            else if (this.MinimizeBox == false)
+            {
+                ControlBoxMinimizeButton.Visible = false;
+            }
+            //Maximize
+            if (this.MaximizeBox == true)
+            {
+                ControlBoxMaximizeButton.Visible = true;
+            }
+            else if (this.MaximizeBox == false)
+            {
+                ControlBoxMaximizeButton.Visible = false;
+            }
+            #endregion
+
+            ControlBoxTextLabel.Text = this.Text;
+        }
+
+        private void ControlBoxPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            ControlBox_MouseMove_Drag(e);
+        }
+
+        private void PanelControlBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            ControlBox_MouseMove_Drag(e);
+        }
+
+        private void ControlBoxTextLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            ControlBox_MouseMove_Drag(e);
+        }
+
+        private void ControlBoxTextPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            ControlBox_MouseMove_Drag(e);
+        }
+
+        private void ControlBoxCloseButton_Click(object sender, EventArgs e)
+        {
+            // Jeśli zamykasz tylko okno:
+            //this.Close();
+
+            // Jeśli zamykasz całą aplikację:
+            Application.Exit();
+        }
+
+        private void ControlBoxMinimizeButton_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void ControlBoxMaximizeButton_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+        #endregion
     }
 }
 
